@@ -23,29 +23,33 @@ function Signup(props) {
     if (form.checkValidity() === false) {
       setError(true);
     } else {
+      if (password !== confirmpassword) {
+        setError(true)
+        setErrmessage("Passwords won't match")
+      } else {
+        (async () => {
+          setLoading(true)
+          const rawResponse = await fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username, password: password })
+          });
+          const response = await rawResponse.json();
+          setLoading(false)
+          console.log(response);
 
-      (async () => {
-        setLoading(true)
-        const rawResponse = await fetch('http://localhost:5000/login', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username: username, password: password })
-        });
-        const response = await rawResponse.json();
-        setLoading(false)
-        console.log(response);
+          if (response.statusCode && response.statusCode === 200)
+            history.push("/home")
+          else {
+            setError(true)
+            setErrmessage(response.message)
+          }
 
-        if (response.statusCode && response.statusCode === 200)
-          history.push("/home")
-        else {
-          setError(true)
-          setErrmessage(response.message)
-        }
-
-      })();
+        })();
+      }
     }
   };
 
@@ -83,7 +87,7 @@ function Signup(props) {
           </Form.Group>
         </Form>
         <div className="accountrow">
-          Already have account ? 
+          Already have account ?
          <div className='signuptext' onClick={login}> Login</div >
         </div>
       </Card>
