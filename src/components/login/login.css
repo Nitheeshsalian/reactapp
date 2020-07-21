@@ -1,0 +1,47 @@
+.LoginPage {
+    background-color: rgb(152, 230, 255);
+    background-image: url('/img/background.jpg');
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    width: 300px
+}
+
+.container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    flex:1
+}
+
+.btngroup {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+
+}
+
+.button {
+    width: inherit;
+    margin-bottom: 30px;
+}
+
+.signuptext{
+    text-align: center;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.accountrow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
